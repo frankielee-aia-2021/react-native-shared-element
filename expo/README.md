@@ -9,11 +9,13 @@ This library in itself is not a Navigation- or Router library. Instead, it provi
 
 Read more about the [motivation behind this package and what it tries to solve](./MOTIVATION.md).
 
-| Platform compatibility | React Native | Expo SDK | Remarks                        |
-| ---------------------- | ------------ | -------- | ------------------------------ |
-| iOS                    | ✅ 0.59+      | ✅ 35+    | Does not work in iOS Simulator |
-| Android                | ✅ 0.59+      | ✅ 35+    |                                |
-| Web                    | ❌            | ❌        | In progress                    |
+### Platform compatibility
+
+| Platform | React Native | Expo SDK | Remarks                        |
+| -------- | ------------ | -------- | ------------------------------ |
+| iOS      | ✅ 0.59+      | ✅ 35+    | Does not work in iOS Simulator |
+| Android  | ✅ 0.59+      | ✅ 35+    |                                |
+| Web      | ❌            | ❌        | In progress                    |
 
 
 ## Installation
