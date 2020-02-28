@@ -14,3 +14,6 @@ This library solves that problem through an all native implementation which is v
 - [x] Shadow transitions
 - [x] Cross-fade transitions
 - [x] Clipping reveal transitions
+
+
+Want to know more, read here [how it works](../docs/how-it-works.md)!

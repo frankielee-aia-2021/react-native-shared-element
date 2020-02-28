@@ -23,7 +23,7 @@ Native shared element transition _"primitives"_ for react-native 💫
 
 > This library in itself is not a Navigation- or Router library. Instead, it provides a set of comprehensive full native building blocks for performing shared element transitions in Router- or Transition libraries. If you are looking [for the React Navigation binding, you can find it here](https://github.com/IjzerenHein/react-navigation-shared-element).
 
-Read more about the [motivation behind this package and what it tries to solve](./docs/Motivation.md).
+Read more about the [motivation behind this package](./docs/motivation.md) and [how it works](./docs/how-it-works.md).
 
 
 ## Platform compatibility
