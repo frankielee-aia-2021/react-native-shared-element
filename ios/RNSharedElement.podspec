@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.platforms      = { :ios => "9.0" }
   s.source         = { :git => "https://github.com/IjzerenHein/expo-shared-element.git", :tag => "v#{s.version}" }
   s.source_files   = "ios/**/*.{h,m}"
-  s.preserva_paths = "ios/**/*.{h,m}"
+  s.preserve_paths = "ios/**/*.{h,m}"
 
   s.dependency 'React'
 end
