@@ -1,17 +1,14 @@
 # expo-shared-element
 
-<span class="badge-npmversion"><a href="https://www.npmjs.com/package/firestorter" title="View this project on NPM"><img src="https://img.shields.io/npm/v/firestorter.svg" alt="NPM version" /></a></span>
-[![Build Status](https://travis-ci.org/IjzerenHein/firestorter.svg?branch=master)](https://travis-ci.org/IjzerenHein/firestorter)
-[![codecov](https://codecov.io/gh/IjzerenHein/firestorter/branch/master/graph/badge.svg)](https://codecov.io/gh/IjzerenHein/firestorter)
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/IjzerenHein/firestorter/master/LICENSE.txt)
-[![Release Notes](https://release-notes.com/badges/v1.svg)](https://release-notes.com/@IjzerenHein/Firestorter)
+<span class="badge-npmversion"><a href="https://www.npmjs.com/package/react-native-shared-element" title="View this project on NPM"><img src="https://img.shields.io/npm/v/react-native-shared-element.svg" alt="NPM version" /></a></span>
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/IjzerenHein/react-native-shared-element/master/LICENSE.txt)
 
 Native shared element transition _"primitives"_ for react-native 💫
 
-> This library in itself is not a Navigation- or Router library. Instead, it provides a set of comprehensive full native building blocks for performing shared element transitions in Router- or Transition libraries. If you are looking [for the React Navigation binding, you can find it here](https://github.com/IjzerenHein/react-navigation-shared-element).
-
 ![MagicMoveGif-iOS](../set-ios.gif)
 ![MagicMoveGif-Android](../set-android.gif)
+
+> This library in itself is not a Navigation- or Router library. Instead, it provides a set of comprehensive full native building blocks for performing shared element transitions in Router- or Transition libraries. If you are looking [for the React Navigation binding, you can find it here](https://github.com/IjzerenHein/react-navigation-shared-element).
 
 Read more about the [motivation behind this package and what it tries to solve](./MOTIVATION.md).
 
@@ -35,66 +32,81 @@ To use this in a [bare React Native app](https://docs.expo.io/versions/latest/in
 
 ## Usage
 
-```tsx
-import {
-  SharedElement,
-  SharedElementTransition,
-  nodeFromRef
-} from 'expo-shared-element';
+```jsx
+import { SharedElement, SharedElementTransition, nodeFromRef } from 'react-native-shared-element';
 
-// Scene 1
-let startAncestor;
-let startNode;
-<View ref={ref => startAncestor = nodeFromRef(ref)}>
-  ...
-  <SharedElement onNode={node => startNode = node}>
-    <Image style={styles.image} source={...} />
-  </SharedElement>
-  ...
-</View>
+class App extends React.Component {
+  state = {
+    progress: new Animated.Value(0),
+  }
 
+  render() {
+    const { state } = this;
+    const { width } = Dimensions.get('window');
+    return (
+      <React.Fragment>
+        <TouchableOpacity
+          style={styles.container}
+          activeOpacity={0.5}
+          onPress={state.isScene2Visible ? this.onPressBack : this.onPressNavigate}>
 
-// Scene2
-let endAncestor;
-let endNode;
-<View ref={ref => endAncestor = nodeFromRef(ref)}>
-  ...
-  <SharedElement onNode={node => endNode = node}>
-    <Image style={styles.image} source={...} />
-  </SharedElement>
-  ...
-</View>
+          {/* Scene 1 */}
+          <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [
+            {translateX: Animated.multiply(-200, state.progress)}]}}>
+            <View style={styles.scene} ref={this.onSetScene1Ref}>
+              <SharedElement onNode={node => this.setState({ scene1Node: node })}>
+                <Image style={styles.image1} source={require('./logo.png')} />
+              </SharedElement>
+            </View>
+          </Animated.View>
 
-// Render overlay in front of screen
-const position = new Animated.Value(0);
-<View style={StyleSheet.absoluteFill}>
-  <SharedElementTransition
-    start={{
-      node: startNode,
-      ancestor: startAncestor
-    }}
-    end={{
-      node: endNode,
-      ancestor: endAncestor
-    }}
-    position={position}
-    animation='move'
-    resize='auto'
-    align='auto'
-     />
-</View>
+          {/* Scene 2 */}
+          {state.isScene2Visible ?
+            <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [
+              {translateX: Animated.multiply(-width, Animated.add(state.progress, -1))}]}}>
+              <View style={styles.scene2} ref={this.onSetScene2Ref}>
+                <SharedElement onNode={node => this.setState({ scene2Node: node })}>
+                  <Image style={styles.image2} source={require('./logo.png')} />
+                </SharedElement>
+              </View>
+            </Animated.View>
+            : undefined}
+        </TouchableOpacity>
+
+        {/* Transition overlay */}
+        {state.isInProgress ? <View style={styles.sharedElementOverlay} pointerEvents='none'>
+          <SharedElementTransition
+            start={{
+              node: state.scene1Node,
+              ancestor: state.scene1Ancestor
+            }}
+            end={{
+              node: state.scene2Node,
+              ancestor: state.scene2Ancestor
+            }}
+            position={state.progress}
+            animation='move'
+            resize='auto'
+            align='auto' />
+        </View>
+         : undefined}
+
+      </React.Fragment>
+    );
+  }
+}
 ```
 
-<a class="snack-inline-example-button" href="https://snack.expo.io?platform=android&amp;name=Basic%20Barometer%20usage&amp;sdkVersion=36.0.0&amp;dependencies=expo-sensors&amp;sourceUrl=https%3A%2F%2Fdocs.expo.io%2Fstatic%2Fexamples%2Fv36.0.0%2Fbarometer.js" target="_blank">Try this example on Snack <svg width="14" height="14" viewBox="0 0 16 16" style="margin-left: 5px; vertical-align: -1px;"><g fill="none" stroke="currentColor"><path d="M8.5.5h7v7M8 8L15.071.929M9.07 3.5H1.5v11h11V6.93"></path></g></svg></a>
+[View full example on Snack <svg width="14" height="14" viewBox="0 0 16 16" style="margin-left: 5px; vertical-align: -1px;"><g fill="none" stroke="currentColor"><path d="M8.5.5h7v7M8 8L15.071.929M9.07 3.5H1.5v11h11V6.93"></path></g></svg>](https://snack.expo.io/@ijzerenhein/expo-shared-element)
 
 
 ## API
 
 ```js
-import { SharedElement, SharedElementTransitions } from 'expo-shared-element';
+import { SharedElement, SharedElementTransitions, nodeFromRef } from 'expo-shared-element';
 ```
 
-### SharedElement
+### `<SharedElement>`
 
 The `<SharedElement>` component accepts a single child and returns a `node` to it through the `onNode` event handler. The child must correspond to a "real" `View` which exists in the native view hierarchy.
 
@@ -106,7 +118,7 @@ The `<SharedElement>` component accepts a single child and returns a `node` to i
 | `onNode`        | `function` | Event handler that sets or unsets the node-handle                                    |
 | `View props...` |            | Other props supported by View                                                        |
 
-### SharedElementTransition
+### `<SharedElementTransition>`
 
 The `<SharedElementTransition>` component executes a shared element transition natively. It natively performs the following tasks: measure, clone, hide, animate and unhide, to achieve the best results.
 
@@ -161,6 +173,11 @@ In this case you can use `resize="clip"` and `align="left-top"` to create a text
 `auto`, `left-center`, `left-top`, `left-right`, `right-center`, `right-top`, `right-right`, `center-top` `center-center`, `center-bottom`
 
 When `auto` is selected, the default alignment strategy is used, which is `center-center`.
+
+
+### `nodeFromRef(ref: RefObject<any>, isParent?: boolean, parentInstance: any)`
+
+Creates a shared element node from a component `ref`.
 
 
 ## Resources
