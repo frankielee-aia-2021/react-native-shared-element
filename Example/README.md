@@ -1,6 +1,6 @@
 # Shared Element Transition Example
 
-The example app includes a variety of tests and receipes. It features a simple stack router which implements the shared element primitives.
+The example app serves as an exploration and testing tool. It features a custom stack router which implements the shared element primitives. It also implements the react-navigation binding and serves as a testing tool for that.
 
 ## Usage
 

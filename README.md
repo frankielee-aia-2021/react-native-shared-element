@@ -1,140 +1,125 @@
-# react-native-shared-element <!-- omit in toc -->
+# expo-shared-element
+
+<p>
+   <a aria-label="Version" href="https://www.npmjs.com/package/react-native-shard-element" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/react-native-shared-element.svg?style=flat-square&label=Version&labelColor=000000&color=4630EB">
+  </a>
+  <a aria-label="License: MIT" href="https://github.com/expo/expo/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-success.svg?style=flat-square&color=33CC12" target="_blank" />
+  </a>
+  <a aria-label="Downloads" href="http://www.npmtrends.com/react-native-shared-element" target="_blank">
+      <img alt="Downloads" src="https://img.shields.io/npm/dm/react-native-shared-element.svg?style=flat-square&labelColor=gray&color=33CC12&label=Downloads" />
+  </a>
+  <!--<a aria-label="Circle CI" href="https://circleci.com/gh/expo/expo/tree/master">
+    <img alt="Circle CI" src="https://flat.badgen.net/circleci/github/expo/expo?label=Circle%20CI&labelColor=555555&icon=circleci">
+  </a>-->
+</p>
+
 
 Native shared element transition _"primitives"_ for react-native 💫
 
-This library in itself is not a Navigation- or Router library. Instead, it provides a set of comprehensive full native building blocks for performing shared element transitions in Router- or Transition libraries. If you are looking [for the React Navigation binding, you can find it here](https://github.com/IjzerenHein/react-navigation-shared-element).
+![MagicMoveGif-iOS](./set-ios.gif)
+![MagicMoveGif-Android](./set-android.gif)
 
-![MagicMoveGif-iOS](set-ios.gif)
-![MagicMoveGif-Android](set-android.gif)
+> This library in itself is not a Navigation- or Router library. Instead, it provides a set of comprehensive full native building blocks for performing shared element transitions in Router- or Transition libraries. If you are looking [for the React Navigation binding, you can find it here](https://github.com/IjzerenHein/react-navigation-shared-element).
 
-## Motivation
+Read more about the [motivation behind this package and what it tries to solve](./docs/Motivation.md).
 
-Shared-element transitions add **shine** to your app but can be hard to do in practise.
-It's possible to achieve some nice transitions by building custom modals and using the the core `react-native API`, But this also brings with it many restrictions. Things like resizing an image or making sure no _"flicker"_ occurs even an older Android devices can be a real challenge.
 
-This library solves that problem through an all native implementation which is very close to the metal of the OS. It solves the problem by providing a set of _"primitives"_, which don't require any back and forth passes over the react-native bridge. This way, the best possible performance is achieved and better image transitions can be accomplished. The following list is an impression of the kinds of problems that are solved through the native implementation.
+## Platform compatibility
 
-- [x] No flickering
-- [x] CPU & GPU friendly
-- [x] Image resizeMode transitions
-- [x] Scrollview clipping
-- [x] Border (radius, color, width) transitions
-- [x] Background color transitions
-- [x] Shadow transitions
-- [x] Cross-fade transitions
-- [x] Clipping reveal transitions
+| Platform | React Native | Expo SDK | Remarks                                |
+| -------- | ------------ | -------- | -------------------------------------- |
+| iOS      | ✅ 0.59+      | ✅ 35+    | Expo SDK 37 is recommended             |
+| Android  | ✅ 0.59+      | ✅ 35+    | Expo SDK 37 is recommended             |
+| Web      | ➖            | ➖        | 🚧 Under construction, partially works |
 
-## Under development
-
-This library is under active development. The iOS and Android implementations are mostly done, which exception of some edge cases. The library also aims to support the `web` platform with an optimized DOM implementation. That development is about 60% done.
-
-## Index <!-- omit in toc -->
-
-- [Motivation](#motivation)
-- [Under development](#under-development)
-- [Installation](#installation)
-- [Basic usage](#basic-usage)
-- [How it works](#how-it-works)
-- [API Documentation](#api-documentation)
-  - [SharedElement](#sharedelement)
-    - [Props](#props)
-  - [SharedElementTransition](#sharedelementtransition)
-    - [Props](#props-1)
-  - [Transitions effects](#transitions-effects)
-    - [SharedElementAnimation](#sharedelementanimation)
-    - [SharedElementResize](#sharedelementresize)
-    - [SharedElementAlign](#sharedelementalign)
-- [Example apps](#example-apps)
-- [License](#license)
-- [Credits](#credits)
 
 ## Installation
 
-```bash
-yarn add react-native-shared-element
+```
+$ expo install expo-shared-element
 ```
 
-And optionally link when needed
+To use this in a [bare React Native app](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/#bare-workflow), follow the installation instructions.
 
-```bash
-react-native link react-native-shared-element
+## Usage
+
+```jsx
+import { SharedElement, SharedElementTransition, nodeFromRef } from 'expo-shared-element';
+
+class App extends React.Component {
+  state = {
+    progress: new Animated.Value(0),
+  }
+
+  render() {
+    const { state } = this;
+    const { width } = Dimensions.get('window');
+    return (
+      <React.Fragment>
+        <TouchableOpacity
+          style={styles.container}
+          activeOpacity={0.5}
+          onPress={state.isScene2Visible ? this.onPressBack : this.onPressNavigate}>
+
+          {/* Scene 1 */}
+          <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [
+            {translateX: Animated.multiply(-200, state.progress)}]}}>
+            <View style={styles.scene} ref={this.onSetScene1Ref}>
+              <SharedElement onNode={node => this.setState({ scene1Node: node })}>
+                <Image style={styles.image1} source={require('./logo.png')} />
+              </SharedElement>
+            </View>
+          </Animated.View>
+
+          {/* Scene 2 */}
+          {state.isScene2Visible ?
+            <Animated.View style={{...StyleSheet.absoluteFillObject, transform: [
+              {translateX: Animated.multiply(-width, Animated.add(state.progress, -1))}]}}>
+              <View style={styles.scene2} ref={this.onSetScene2Ref}>
+                <SharedElement onNode={node => this.setState({ scene2Node: node })}>
+                  <Image style={styles.image2} source={require('./logo.png')} />
+                </SharedElement>
+              </View>
+            </Animated.View>
+            : undefined}
+        </TouchableOpacity>
+
+        {/* Transition overlay */}
+        {state.isInProgress ? <View style={styles.sharedElementOverlay} pointerEvents='none'>
+          <SharedElementTransition
+            start={{
+              node: state.scene1Node,
+              ancestor: state.scene1Ancestor
+            }}
+            end={{
+              node: state.scene2Node,
+              ancestor: state.scene2Ancestor
+            }}
+            position={state.progress}
+            animation='move'
+            resize='auto'
+            align='auto' />
+        </View>
+         : undefined}
+
+      </React.Fragment>
+    );
+  }
+}
 ```
 
-## Basic usage
+[View full example on Snack <svg width="14" height="14" viewBox="0 0 16 16" style="margin-left: 5px; vertical-align: -1px;"><g fill="none" stroke="currentColor"><path d="M8.5.5h7v7M8 8L15.071.929M9.07 3.5H1.5v11h11V6.93"></path></g></svg>](https://snack.expo.io/@ijzerenhein/expo-shared-element)
+
+
+## API
 
 ```js
-import {
-  SharedElement,
-  SharedElementTransition,
-  nodeFromRef
-} from 'react-native-shared-element';
-
-// Scene 1
-let startAncestor;
-let startNode;
-<View ref={ref => startAncestor = nodeFromRef(ref)}>
-  ...
-  <SharedElement onNode={node => startNode = node}>
-    <Image style={styles.image} source={...} />
-  </SharedElement>
-  ...
-</View>
-
-
-// Scene2
-let endAncestor;
-let endNode;
-<View ref={ref => endAncestor = nodeFromRef(ref)}>
-  ...
-  <SharedElement onNode={node => endNode = node}>
-    <Image style={styles.image} source={...} />
-  </SharedElement>
-  ...
-</View>
-
-// Render overlay in front of screen
-const position = new Animated.Value(0);
-<View style={StyleSheet.absoluteFill}>
-  <SharedElementTransition
-    start={{
-      node: startNode,
-      ancestor: startAncestor
-    }}
-    end={{
-      node: endNode,
-      ancestor: endAncestor
-    }}
-    position={position}
-    animation='move'
-    resize='auto'
-    align='auto'
-     />
-</View>
+import { SharedElement, SharedElementTransitions, nodeFromRef } from 'expo-shared-element';
 ```
 
-## How it works
-
-react-native-shared-element is a _"primitive"_ that runs shared element transitions entirely native without requiring any passes over the JavaScript bridge. It works by taking in a start- and end node, which are obtained using the `<SharedElement>` component.
-
-Whenever a transition between screens occurs (e.g. performed by a router/navigator), a view in front of the app should be rendered to host the shared element transition. The `position` prop is used to interpolate between the start- and end nodes, `0` meaning "Show the start node" and `1` meaning "Show the end node".
-
-Whenever the `<SharedElementTransition>` component is rendered, it performs the following tasks:
-
-- Measure the size and position of the provided elements
-- Obtain the styles of the elements
-- Obtain the visual content of the elements (e.g. an image or a view snapshot)
-- Render a visual copy of the start element at its current position
-- Hide the original elements whenever the visual copies are on the screen
-- Monitor the `position` prop and render the shared element transition accordingly
-- Upon unmount, unhide the original elements
-
-You typically do not use this component directly, but instead use a Router or Transition-engine which provides a higher-level API.
-See [`./Example/src/components/Router.js`](./Example/src/components/Router.js) for an example implementation of a simple stack router using
-shared element transitions.
-
-## API Documentation
-
-### SharedElement
+### `<SharedElement>`
 
 The `<SharedElement>` component accepts a single child and returns a `node` to it through the `onNode` event handler. The child must correspond to a "real" `View` which exists in the native view hierarchy.
 
@@ -146,7 +131,7 @@ The `<SharedElement>` component accepts a single child and returns a `node` to i
 | `onNode`        | `function` | Event handler that sets or unsets the node-handle                                    |
 | `View props...` |            | Other props supported by View                                                        |
 
-### SharedElementTransition
+### `<SharedElementTransition>`
 
 The `<SharedElementTransition>` component executes a shared element transition natively. It natively performs the following tasks: measure, clone, hide, animate and unhide, to achieve the best results.
 
@@ -202,17 +187,20 @@ In this case you can use `resize="clip"` and `align="left-top"` to create a text
 
 When `auto` is selected, the default alignment strategy is used, which is `center-center`.
 
-## Example apps
 
-- The main example & test app is located in [`./Example`](./Example) and serves as an exploration and testing tool. It features a custom stack router which implements the shared element primitives. It also implements the react-navigation binding and serves as a testing tool for that.
-- [Simple demo app using RN60 and the react-navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element-rn60demo)
+### `nodeFromRef(ref: RefObject<any>, isParent?: boolean, parentInstance: any)`
 
-## License
+Creates a shared element node from a component `ref`.
 
-Shared element transition library is licensed under [The MIT License](./LICENSE.txt).
 
-## Credits
+## Resources
 
-This project is supported by amazing people from [Expo.io](https://expo.io)
+- [Main Example & Test app](./Example)
+- [Simple demo app using the react-navigation binding](https://github.com/IjzerenHein/react-navigation-shared-element-demo)
+- [Motivation](./docs/motivation.md)
+- [How it works](./docs/how-it-works.md)
 
-[![expo](https://avatars2.githubusercontent.com/u/12504344?v=3&s=100 "Expo.io")](https://expo.io)
+
+## Contributing
+
+If you like `expo-shared-element` and want to help make it better then check out the [contributing guide](./CONTRIBUTING.md)!
