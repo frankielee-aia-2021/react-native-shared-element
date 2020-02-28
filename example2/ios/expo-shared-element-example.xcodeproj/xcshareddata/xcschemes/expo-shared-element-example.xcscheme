@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B56386401DB9693800A0598C"
-               BuildableName = "blank-template--typescript-.app"
-               BlueprintName = "blank-template--typescript-"
-               ReferencedContainer = "container:blank-template--typescript-.xcodeproj">
+               BuildableName = "expo-shared-element-example.app"
+               BlueprintName = "expo-shared-element-example"
+               ReferencedContainer = "container:expo-shared-element-example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,27 +26,23 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B56386401DB9693800A0598C"
-            BuildableName = "blank-template--typescript-.app"
-            BlueprintName = "blank-template--typescript-"
-            ReferencedContainer = "container:blank-template--typescript-.xcodeproj">
+            BuildableName = "expo-shared-element-example.app"
+            BlueprintName = "expo-shared-element-example"
+            ReferencedContainer = "container:expo-shared-element-example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -58,9 +54,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B56386401DB9693800A0598C"
-            BuildableName = "blank-template--typescript-.app"
-            BlueprintName = "blank-template--typescript-"
-            ReferencedContainer = "container:blank-template--typescript-.xcodeproj">
+            BuildableName = "expo-shared-element-example.app"
+            BlueprintName = "expo-shared-element-example"
+            ReferencedContainer = "container:expo-shared-element-example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -70,8 +66,6 @@
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -84,9 +78,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B56386401DB9693800A0598C"
-            BuildableName = "blank-template--typescript-.app"
-            BlueprintName = "blank-template--typescript-"
-            ReferencedContainer = "container:blank-template--typescript-.xcodeproj">
+            BuildableName = "expo-shared-element-example.app"
+            BlueprintName = "expo-shared-element-example"
+            ReferencedContainer = "container:expo-shared-element-example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

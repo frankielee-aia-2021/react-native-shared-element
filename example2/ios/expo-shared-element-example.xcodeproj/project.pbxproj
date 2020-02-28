@@ -18,14 +18,14 @@
 		B5CFBF4F1EDE419400B4BE24 /* EXBuildConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */; };
 		B5DB04801F3A684600E91581 /* shell-app-manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047E1F3A684600E91581 /* shell-app-manifest.json */; };
 		B5DB04811F3A684600E91581 /* shell-app.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5DB047F1F3A684600E91581 /* shell-app.bundle */; };
-		EBB8117C1BFA0514F79CAF74 /* libPods-blank-template--typescript-.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-blank-template--typescript-.a */; };
+		EBB8117C1BFA0514F79CAF74 /* libPods-expo-shared-element-example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A88D15726AD99E8A257BC7 /* libPods-expo-shared-element-example.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2C1548D9E4CB1AEFA5CCAE6D /* Pods-blank-template--typescript-.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blank-template--typescript-.debug.xcconfig"; path = "Pods/Target Support Files/Pods-blank-template--typescript-/Pods-blank-template--typescript-.debug.xcconfig"; sourceTree = "<group>"; };
-		A47FE4D7F70906B7DC8CE39B /* Pods-blank-template--typescript-.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-blank-template--typescript-.release.xcconfig"; path = "Pods/Target Support Files/Pods-blank-template--typescript-/Pods-blank-template--typescript-.release.xcconfig"; sourceTree = "<group>"; };
+		2C1548D9E4CB1AEFA5CCAE6D /* Pods-expo-shared-element-example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expo-shared-element-example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-expo-shared-element-example/Pods-expo-shared-element-example.debug.xcconfig"; sourceTree = "<group>"; };
+		A47FE4D7F70906B7DC8CE39B /* Pods-expo-shared-element-example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expo-shared-element-example.release.xcconfig"; path = "Pods/Target Support Files/Pods-expo-shared-element-example/Pods-expo-shared-element-example.release.xcconfig"; sourceTree = "<group>"; };
 		B501732A1DC01252003445D9 /* EXShell.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXShell.plist; sourceTree = "<group>"; };
-		B56386411DB9693800A0598C /* blank-template--typescript-.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "blank-template--typescript-.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B56386411DB9693800A0598C /* expo-shared-element-example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "expo-shared-element-example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56386471DB9693800A0598C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B56386481DB9693800A0598C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B56386501DB9693800A0598C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,7 +38,7 @@
 		B5CFBF4E1EDE419400B4BE24 /* EXBuildConstants.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EXBuildConstants.plist; sourceTree = "<group>"; };
 		B5DB047E1F3A684600E91581 /* shell-app-manifest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "shell-app-manifest.json"; sourceTree = "<group>"; };
 		B5DB047F1F3A684600E91581 /* shell-app.bundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "shell-app.bundle"; sourceTree = "<group>"; };
-		C4A88D15726AD99E8A257BC7 /* libPods-blank-template--typescript-.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-blank-template--typescript-.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4A88D15726AD99E8A257BC7 /* libPods-expo-shared-element-example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-expo-shared-element-example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBB8117C1BFA0514F79CAF74 /* libPods-blank-template--typescript-.a in Frameworks */,
+				EBB8117C1BFA0514F79CAF74 /* libPods-expo-shared-element-example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +56,7 @@
 		1A42804E64B7E9E0AB8B6799 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C4A88D15726AD99E8A257BC7 /* libPods-blank-template--typescript-.a */,
+				C4A88D15726AD99E8A257BC7 /* libPods-expo-shared-element-example.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -64,8 +64,8 @@
 		5B29BC350A332C58878A9F13 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				2C1548D9E4CB1AEFA5CCAE6D /* Pods-blank-template--typescript-.debug.xcconfig */,
-				A47FE4D7F70906B7DC8CE39B /* Pods-blank-template--typescript-.release.xcconfig */,
+				2C1548D9E4CB1AEFA5CCAE6D /* Pods-expo-shared-element-example.debug.xcconfig */,
+				A47FE4D7F70906B7DC8CE39B /* Pods-expo-shared-element-example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -73,7 +73,7 @@
 		B56386381DB9693800A0598C = {
 			isa = PBXGroup;
 			children = (
-				B56386431DB9693800A0598C /* blank-template--typescript- */,
+				B56386431DB9693800A0598C /* expo-shared-element-example */,
 				B56386421DB9693800A0598C /* Products */,
 				5B29BC350A332C58878A9F13 /* Pods */,
 				1A42804E64B7E9E0AB8B6799 /* Frameworks */,
@@ -83,12 +83,12 @@
 		B56386421DB9693800A0598C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B56386411DB9693800A0598C /* blank-template--typescript-.app */,
+				B56386411DB9693800A0598C /* expo-shared-element-example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B56386431DB9693800A0598C /* blank-template--typescript- */ = {
+		B56386431DB9693800A0598C /* expo-shared-element-example */ = {
 			isa = PBXGroup;
 			children = (
 				B56386471DB9693800A0598C /* AppDelegate.h */,
@@ -96,7 +96,7 @@
 				B56386501DB9693800A0598C /* Assets.xcassets */,
 				B563865B1DB96A5E00A0598C /* Supporting */,
 			);
-			path = "blank-template--typescript-";
+			path = "expo-shared-element-example";
 			sourceTree = "<group>";
 		};
 		B563865B1DB96A5E00A0598C /* Supporting */ = {
@@ -119,9 +119,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B56386401DB9693800A0598C /* blank-template--typescript- */ = {
+		B56386401DB9693800A0598C /* expo-shared-element-example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "blank-template--typescript-" */;
+			buildConfigurationList = B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "expo-shared-element-example" */;
 			buildPhases = (
 				23539343DCC44EF8449429EE /* [CP] Check Pods Manifest.lock */,
 				B5722AD01DFB7E3F0084848F /* Prepare Expo */,
@@ -135,9 +135,9 @@
 			);
 			dependencies = (
 			);
-			name = "blank-template--typescript-";
-			productName = "blank-template--typescript-";
-			productReference = B56386411DB9693800A0598C /* blank-template--typescript-.app */;
+			name = "expo-shared-element-example";
+			productName = "expo-shared-element-example";
+			productReference = B56386411DB9693800A0598C /* expo-shared-element-example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +156,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B563863C1DB9693800A0598C /* Build configuration list for PBXProject "blank-template--typescript-" */;
+			buildConfigurationList = B563863C1DB9693800A0598C /* Build configuration list for PBXProject "expo-shared-element-example" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -169,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B56386401DB9693800A0598C /* blank-template--typescript- */,
+				B56386401DB9693800A0598C /* expo-shared-element-example */,
 			);
 		};
 /* End PBXProject section */
@@ -219,7 +219,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-blank-template--typescript--checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-expo-shared-element-example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -232,7 +232,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-blank-template--typescript-/Pods-blank-template--typescript--resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-expo-shared-element-example/Pods-expo-shared-element-example-resources.sh",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/api.amplitude.com.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoCaLimitedRsaCertificationAuthority.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaCA.der",
@@ -249,7 +249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-blank-template--typescript-/Pods-blank-template--typescript--resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-expo-shared-element-example/Pods-expo-shared-element-example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B5722AD01DFB7E3F0084848F /* Prepare Expo */ = {
@@ -385,11 +385,11 @@
 		};
 		B56386591DB9693800A0598C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-blank-template--typescript-.debug.xcconfig */;
+			baseConfigurationReference = 2C1548D9E4CB1AEFA5CCAE6D /* Pods-expo-shared-element-example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C8D8QTF339;
-				INFOPLIST_FILE = "$(SRCROOT)/blank-template--typescript-/Supporting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/expo-shared-element-example/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.expo-shared-element-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -399,11 +399,11 @@
 		};
 		B563865A1DB9693800A0598C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-blank-template--typescript-.release.xcconfig */;
+			baseConfigurationReference = A47FE4D7F70906B7DC8CE39B /* Pods-expo-shared-element-example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C8D8QTF339;
-				INFOPLIST_FILE = "$(SRCROOT)/blank-template--typescript-/Supporting/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/expo-shared-element-example/Supporting/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.expo-shared-element-example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -414,7 +414,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B563863C1DB9693800A0598C /* Build configuration list for PBXProject "blank-template--typescript-" */ = {
+		B563863C1DB9693800A0598C /* Build configuration list for PBXProject "expo-shared-element-example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56386561DB9693800A0598C /* Debug */,
@@ -423,7 +423,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "blank-template--typescript-" */ = {
+		B56386581DB9693800A0598C /* Build configuration list for PBXNativeTarget "expo-shared-element-example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B56386591DB9693800A0598C /* Debug */,
