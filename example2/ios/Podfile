@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 target 'expo-shared-element-example' do
-  pod 'ExpoKit',
+   pod 'ExpoKit',
     :git => "http://github.com/expo/expo.git",
     :tag => "ios/2.14.4",
     :subspecs => [
