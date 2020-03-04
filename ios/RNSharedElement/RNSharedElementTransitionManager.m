@@ -4,11 +4,7 @@
 //
 
 #import <UMCore/UMModuleRegistryConsumer.h>
-//#import <UMReactNativeAdapter/UMReactNativeAdapter.h>
-//#import <UMReactNativeAdapter/UMBridgeModule.h>
 #import <UMCore/UMUIManager.h>
-//#import <React/RCTBridge.h>
-//#import <React/RCTUIManager.h>
 #import "RNSharedElementTransitionManager.h"
 #import "RNSharedElementTransition.h"
 #import "RNSharedElementNodeManager.h"
@@ -18,7 +14,6 @@
 
 @property (nonatomic, strong) RNSharedElementNodeManager *nodeManager;
 @property (nonatomic, weak) UMModuleRegistry *moduleRegistry;
-//@property (nonatomic, weak) UMReactNativeAdapter *rnAdapter;
 
 @end
 
@@ -54,37 +49,7 @@ UM_EXPORT_MODULE(RNSharedElementTransition);
 - (void)setModuleRegistry:(UMModuleRegistry *)moduleRegistry
 {
   _moduleRegistry = moduleRegistry;
-  
-  // Access to the bridge is required in order to convert node-handles into UIViews.
-  // Search for the internal UMReactNativeAdapter and store its ref for later use.
-  //_rnAdapter = (UMReactNativeAdapter *) [_moduleRegistry getModuleImplementingProtocol:@protocol(UMUIManager)];
 }
-
-/*- (UIView *)viewForNodeHandle:(NSObject *) nodeHandle
- {
- if (![nodeHandle isKindOfClass:[NSNumber class]]) return nil;
- if ((_rnAdapter == nil) || (_rnAdapter.bridge == nil) || (_rnAdapter.bridge.uiManager == nil)) return nil;
- NSNumber* reactTag = (NSNumber *) nodeHandle;
- return [_rnAdapter.bridge.uiManager viewForReactTag:reactTag];
- }
- 
- - (RNSharedElementNode*) nodeFromJson:(NSDictionary*)json
- {
- if (json == nil) return nil;
- NSObject* nodeHandle = [json valueForKey:@"nodeHandle"];
- NSNumber* isParent =[json valueForKey:@"isParent"];
- UIView *sourceView = [self viewForNodeHandle:nodeHandle];
- return (sourceView != nil)
- ? [_nodeManager acquire:(NSNumber *) nodeHandle view:sourceView isParent:[isParent boolValue]]
- : nil;
- }
- 
- - (void) nodeFromJSON:(NSDictionary*)json completion:(void (^)(RNSharedElementNode*))completion
- {
- RNSharedElementNode *node = [self nodeFromJson:json];
- completion(node);
- }*/
-
 
 - (void) nodeFromJSON:(NSDictionary*)json completion:(void (^)(RNSharedElementNode *))completion
 {
