@@ -7,13 +7,25 @@ import android.view.View;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.facebook.react.uimanager.NativeViewHierarchyManager;
+
 public class RNSharedElementNodeManager {
   private Map<Integer, RNSharedElementNode> mNodes = new HashMap<Integer, RNSharedElementNode>();
+  private NativeViewHierarchyManager mNativeViewHierarchyManager;
   private Context mContext;
 
   public RNSharedElementNodeManager(Context context) {
     mContext = context;
   }
+
+  void setNativeViewHierarchyManager(NativeViewHierarchyManager nativeViewHierarchyManager) {
+    mNativeViewHierarchyManager = nativeViewHierarchyManager;
+  }
+
+  NativeViewHierarchyManager getNativeViewHierarchyManager() {
+    return mNativeViewHierarchyManager;
+  }
+
 
   RNSharedElementNode acquire(int reactTag, View view, boolean isParent, View ancestor, Bundle styleConfig) {
     synchronized (mNodes) {

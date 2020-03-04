@@ -89,7 +89,8 @@ public class RNSharedElementTransitionManager extends ViewManager<RNSharedElemen
     final boolean isParent = nodeMap.getBoolean("isParent");
     final Bundle styleConfig = nodeMap.getArguments("nodeStyle").toBundle();
 
-    final UIManager uiManager = mModuleRegistry.getModule(UIManager.class);
+    // THIS code is slowish and causes crashes.
+    /*final UIManager uiManager = mModuleRegistry.getModule(UIManager.class);
     uiManager.addUIBlock(nodeHandle, new UIManager.UIBlock<View>() {
       @Override
       public void resolve(final View nodeView) {
@@ -111,13 +112,13 @@ public class RNSharedElementTransitionManager extends ViewManager<RNSharedElemen
       public void reject(Throwable throwable) {
         // nop
       }
-    }, View.class);
+    }, View.class);*/
 
-    // TODO
-    /*View nodeView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(nodeHandle);
+    // Went back to the old method
+    View nodeView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(nodeHandle);
     View ancestorView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(ancestorHandle);
     RNSharedElementNode node = view.getNodeManager().acquire(nodeHandle, nodeView, isParent, ancestorView, styleConfig);
-    view.setItemNode(item, node);*/
+    view.setItemNode(item, node);
   }
 
   @ExpoProp(name = PROP_START)
