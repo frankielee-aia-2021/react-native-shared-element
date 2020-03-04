@@ -6,7 +6,7 @@
 #ifndef RNSharedElementTransition_h
 #define RNSharedElementTransition_h
 
-#import <React/RCTView.h>
+#import <UMCore/UMModuleRegistry.h>
 #import <UIKit/UIKit.h>
 #import "RNSharedElementNodeManager.h"
 #import "RNSharedElementDelegate.h"
@@ -19,7 +19,7 @@
 @property (nonatomic, assign) RNSharedElementAlign align;
 @property (nonatomic, assign) RNSharedElementNode* startNode;
 @property (nonatomic, assign) RNSharedElementNode* startAncestor;
-@property (nonatomic, copy) RCTDirectEventBlock onMeasureNode;
+@property (nonatomic, copy) UMDirectEventBlock onMeasureNode;
 @property (nonatomic, assign) RNSharedElementNode* endNode;
 @property (nonatomic, assign) RNSharedElementNode* endAncestor;
 

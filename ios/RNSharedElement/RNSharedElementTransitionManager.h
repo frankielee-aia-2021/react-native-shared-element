@@ -6,10 +6,10 @@
 #ifndef RNSharedElementTransitionManager_h
 #define RNSharedElementTransitionManager_h
 
-#import <React/RCTViewManager.h>
-#import <React/RCTBridgeModule.h>
+#import <UMCore/UMViewManager.h>
+#import <UMCore/UMModuleRegistryConsumer.h>
 
-@interface RNSharedElementTransitionManager : RCTViewManager <RCTBridgeModule>
+@interface RNSharedElementTransitionManager : UMViewManager <UMModuleRegistryConsumer>
 
 @end
 

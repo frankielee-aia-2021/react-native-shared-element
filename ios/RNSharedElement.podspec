@@ -16,4 +16,6 @@ Pod::Spec.new do |s|
   s.preserve_paths = "RNSharedElement/**/*.{h,m}"
 
   s.dependency 'React'
+  s.dependency 'UMCore'
+  s.dependency 'UMReactNativeAdapter'
 end
