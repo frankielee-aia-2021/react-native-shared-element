@@ -8,7 +8,7 @@
   "scripts": {
     "build": "expo-module build",
     "clean": "expo-module clean",
-    "lint": "expo-module lint",
+    "lint": "expo-module lint ./example3/src",
     "test": "expo-module test",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
@@ -41,6 +41,8 @@
   "devDependencies": {
     "@types/react": "^16.9.23",
     "@types/react-native": "^0.61.17",
+    "@unimodules/core": "^5.0.0",
+    "@unimodules/react-native-adapter": "^5.0.0",
     "eslint": "^6.8.0",
     "expo-module-scripts": "^1.2.0",
     "prettier": "^1.19.1"
