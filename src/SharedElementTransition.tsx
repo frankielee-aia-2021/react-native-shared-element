@@ -174,7 +174,7 @@ export class SharedElementTransition extends React.Component<
       SharedElementTransition.isNotAvailableWarningShown = true;
       if (Platform.OS === "android" || Platform.OS === "ios") {
         console.warn(
-          "RNSharedElementTransition is not available, did you forget to link `react-native-shared-element` into your project?"
+          "RNSharedElementTransition is not available, did you forget to link `expo-shared-element` into your project?"
         );
       } else {
         console.warn(

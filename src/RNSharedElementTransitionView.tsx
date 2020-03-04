@@ -1,9 +1,9 @@
-import { requireNativeComponent, NativeModules } from "react-native";
+import { requireNativeViewManager, NativeModulesProxy } from "@unimodules/core";
 
-const isAvailable = !!NativeModules.RNSharedElementTransition;
+const isAvailable = !!NativeModulesProxy.RNSharedElementTransition;
 
 if (isAvailable) {
-  NativeModules.RNSharedElementTransition.configure({
+  NativeModulesProxy.RNSharedElementTransition.configure({
     imageResolvers: [
       "RNPhotoView.MWTapDetectingImageView" // react-native-photo-view
     ].map(path => path.split("."))
@@ -11,5 +11,5 @@ if (isAvailable) {
 }
 
 export const RNSharedElementTransitionView = isAvailable
-  ? requireNativeComponent("RNSharedElementTransition")
+  ? requireNativeViewManager("RNSharedElementTransition")
   : undefined;
