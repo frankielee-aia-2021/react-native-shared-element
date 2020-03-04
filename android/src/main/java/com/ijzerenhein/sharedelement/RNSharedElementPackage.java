@@ -1,21 +1,29 @@
 package com.ijzerenhein.sharedelement;
 
-import java.util.*;
+import android.content.Context;
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import java.util.Collections;
+import java.util.List;
 
-public class RNSharedElementPackage implements ReactPackage {
+import org.unimodules.core.BasePackage;
+import org.unimodules.core.ExportedModule;
+import org.unimodules.core.ViewManager;
+import org.unimodules.core.interfaces.SingletonModule;
+
+public class RNSharedElementPackage extends BasePackage {
 
   @Override
-  public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-    return Arrays.<NativeModule>asList(new RNSharedElementModule(reactContext));
+  public List<ExportedModule> createExportedModules(Context context) {
+    return Collections.singletonList((ExportedModule) new RNSharedElementModule(context));
   }
 
   @Override
-  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-    return Arrays.<ViewManager>asList(new RNSharedElementTransitionManager(reactContext));
+  public List<ViewManager> createViewManagers(Context context) {
+    return Collections.singletonList((ViewManager) new RNSharedElementTransitionManager());
   }
+
+  /*@Override
+  public List<SingletonModule> createSingletonModules(Context context) {
+    return Collections.singletonList((SingletonModule) new RNSharedElementNodeManager(context));
+  }*/
 }

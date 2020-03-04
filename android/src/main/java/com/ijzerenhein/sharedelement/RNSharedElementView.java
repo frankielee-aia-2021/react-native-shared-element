@@ -4,8 +4,7 @@ import android.util.Log;
 import android.view.View;
 import android.graphics.Rect;
 import android.graphics.RectF;
-
-import com.facebook.react.uimanager.ThemedReactContext;
+import android.content.Context;
 
 class RNSharedElementView extends View {
   static private String LOG_TAG = "RNSharedElementView";
@@ -13,7 +12,7 @@ class RNSharedElementView extends View {
   private RNSharedElementDrawable mDrawable;
   private RNSharedElementDrawable.ViewType mViewType;
 
-  RNSharedElementView(ThemedReactContext context) {
+  RNSharedElementView(Context context) {
     super(context);
     mViewType = RNSharedElementDrawable.ViewType.NONE;
     mDrawable = new RNSharedElementDrawable();

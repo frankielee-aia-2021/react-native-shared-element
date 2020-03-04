@@ -5,28 +5,17 @@ import java.util.HashMap;
 
 import android.view.View;
 import android.content.Context;
+import android.os.Bundle;
 
-import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.uimanager.NativeViewHierarchyManager;
-
-class RNSharedElementNodeManager {
+public class RNSharedElementNodeManager {
   private Map<Integer, RNSharedElementNode> mNodes = new HashMap<Integer, RNSharedElementNode>();
-  private NativeViewHierarchyManager mNativeViewHierarchyManager;
   private Context mContext;
 
-  RNSharedElementNodeManager(Context context) {
+  public RNSharedElementNodeManager(Context context) {
     mContext = context;
   }
 
-  void setNativeViewHierarchyManager(NativeViewHierarchyManager nativeViewHierarchyManager) {
-    mNativeViewHierarchyManager = nativeViewHierarchyManager;
-  }
-
-  NativeViewHierarchyManager getNativeViewHierarchyManager() {
-    return mNativeViewHierarchyManager;
-  }
-
-  RNSharedElementNode acquire(int reactTag, View view, boolean isParent, View ancestor, ReadableMap styleConfig) {
+  RNSharedElementNode acquire(int reactTag, View view, boolean isParent, View ancestor, Bundle styleConfig) {
     synchronized (mNodes) {
       RNSharedElementNode node = mNodes.get(reactTag);
       if (node != null) {

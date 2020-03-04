@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.annotation.Nullable;
 
 import android.os.Handler;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.content.Context;
 
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.ReadableMap;
 
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.facebook.drawee.view.GenericDraweeView;
@@ -36,7 +36,7 @@ class RNSharedElementNode {
   private View mView;
   private View mAncestorView;
   private boolean mIsParent;
-  private ReadableMap mStyleConfig;
+  private Bundle mStyleConfig;
   private RNSharedElementStyle mResolveStyle;
   private View mResolvedView;
   private int mRefCount;
@@ -49,7 +49,7 @@ class RNSharedElementNode {
   private BaseControllerListener<ImageInfo> mDraweeControllerListener;
   private Handler mRetryHandler;
 
-  RNSharedElementNode(Context context, int reactTag, View view, boolean isParent, View ancestorView, ReadableMap styleConfig) {
+  RNSharedElementNode(Context context, int reactTag, View view, boolean isParent, View ancestorView, Bundle styleConfig) {
     mReactTag = reactTag;
     mView = view;
     mAncestorView = ancestorView;

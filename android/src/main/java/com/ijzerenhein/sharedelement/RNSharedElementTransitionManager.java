@@ -1,44 +1,55 @@
 package com.ijzerenhein.sharedelement;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
-import com.facebook.react.common.MapBuilder;
-import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.SimpleViewManager;
-import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactApplicationContext;
+import org.unimodules.core.ViewManager;
+import org.unimodules.core.arguments.MapArguments;
+import org.unimodules.core.arguments.ReadableArguments;
+import org.unimodules.core.interfaces.ExpoProp;
+import org.unimodules.core.ModuleRegistry;
+import org.unimodules.core.interfaces.services.UIManager;
 
-public class RNSharedElementTransitionManager extends SimpleViewManager<RNSharedElementTransition> {
-  public static final String REACT_CLASS = "RNSharedElementTransition";
+public class RNSharedElementTransitionManager extends ViewManager<RNSharedElementTransition> {
+  public static final String VIEW_CLASS_NAME = "RNSharedElementTransition";
+  public static final String PROP_START = "startNode";
+  public static final String PROP_END = "endNode";
+  public static final String PROP_POSITION = "nodePosition";
+  public static final String PROP_RESIZE = "resize";
+  public static final String PROP_ALIGN = "align";
+  public static final String PROP_ANIMATION = "animation";
 
-  public RNSharedElementTransitionManager(ReactApplicationContext reactContext) {
-    super();
-  }
+  private ModuleRegistry mModuleRegistry;
 
   @Override
   public String getName() {
-    return REACT_CLASS;
+    return VIEW_CLASS_NAME;
   }
 
   @Override
-  public Map getExportedCustomBubblingEventTypeConstants() {
-    return MapBuilder.builder()
-            .put(
-                    "onMeasureNode",
-                    MapBuilder.of(
-                            "phasedRegistrationNames",
-                            MapBuilder.of("bubbled", "onMeasureNode")))
-            .build();
+  public List<String> getExportedEventNames() {
+    return Arrays.asList("onMeasureNode");
   }
 
   @Override
-  public RNSharedElementTransition createViewInstance(ThemedReactContext reactContext) {
-    RNSharedElementModule module = (RNSharedElementModule) reactContext.getNativeModule(RNSharedElementModule.class);
-    return new RNSharedElementTransition(reactContext, module.getNodeManager());
+  public void onCreate(ModuleRegistry moduleRegistry) {
+    mModuleRegistry = moduleRegistry;
+  }
+
+  @Override
+  public RNSharedElementTransition createViewInstance(Context context) {
+    RNSharedElementModule module = (RNSharedElementModule) mModuleRegistry.getExportedModule(RNSharedElementModule.NAME);
+    return new RNSharedElementTransition(context, module.getNodeManager());
+  }
+
+  @Override
+  public ViewManagerType getViewManagerType() {
+    return ViewManagerType.SIMPLE;
   }
 
   @Override
@@ -47,48 +58,75 @@ public class RNSharedElementTransitionManager extends SimpleViewManager<RNShared
     view.releaseData();
   }
 
-  @ReactProp(name = "nodePosition")
-  public void setNodePosition(final RNSharedElementTransition view, final float nodePosition) {
+  @ExpoProp(name = PROP_POSITION)
+  public void setNodePosition(RNSharedElementTransition view, final float nodePosition) {
     view.setNodePosition(nodePosition);
   }
 
-  @ReactProp(name = "animation")
-  public void setAnimation(final RNSharedElementTransition view, final int animation) {
+  @ExpoProp(name = PROP_ANIMATION)
+  public void setAnimation(RNSharedElementTransition view, final int animation) {
     view.setAnimation(RNSharedElementAnimation.values()[animation]);
   }
 
-  @ReactProp(name = "resize")
-  public void setResize(final RNSharedElementTransition view, final int resize) {
+  @ExpoProp(name = PROP_RESIZE)
+  public void setResize(RNSharedElementTransition view, final int resize) {
     view.setResize(RNSharedElementResize.values()[resize]);
   }
 
-  @ReactProp(name = "align")
-  public void setAlign(final RNSharedElementTransition view, final int align) {
+  @ExpoProp(name = PROP_ALIGN)
+  public void setAlign(RNSharedElementTransition view, final int align) {
     view.setAlign(RNSharedElementAlign.values()[align]);
   }
 
-  private void setViewItem(final RNSharedElementTransition view, RNSharedElementTransition.Item item, final ReadableMap map) {
-    if (map == null) return;
-    if (!map.hasKey("node") || !map.hasKey("ancestor")) return;
-    final ReadableMap nodeMap = map.getMap("node");
-    final ReadableMap ancestorMap = map.getMap("ancestor");
-    int nodeHandle = nodeMap.getInt("nodeHandle");
-    int ancestorHandle = ancestorMap.getInt("nodeHandle");
-    boolean isParent = nodeMap.getBoolean("isParent");
-    ReadableMap styleConfig = nodeMap.getMap("nodeStyle");
-    View nodeView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(nodeHandle);
+  private void setViewItem(final RNSharedElementTransition view, final RNSharedElementTransition.Item item, final Map<String, Object> map) {
+    if ((map == null) || (mModuleRegistry == null)) return;
+    final MapArguments args = new MapArguments(map);
+    if (!args.containsKey("node") || !args.containsKey("ancestor")) return;
+    final ReadableArguments nodeMap = args.getArguments("node");
+    final ReadableArguments ancestorMap = args.getArguments("ancestor");
+    final int nodeHandle = nodeMap.getInt("nodeHandle");
+    final int ancestorHandle = ancestorMap.getInt("nodeHandle");
+    final boolean isParent = nodeMap.getBoolean("isParent");
+    final Bundle styleConfig = nodeMap.getArguments("nodeStyle").toBundle();
+
+    final UIManager uiManager = mModuleRegistry.getModule(UIManager.class);
+    uiManager.addUIBlock(nodeHandle, new UIManager.UIBlock<View>() {
+      @Override
+      public void resolve(final View nodeView) {
+        uiManager.addUIBlock(ancestorHandle, new UIManager.UIBlock<View>() {
+          @Override
+          public void resolve(View ancestorView) {
+            RNSharedElementNode node = view.getNodeManager().acquire(nodeHandle, nodeView, isParent, ancestorView, styleConfig);
+            view.setItemNode(item, node);
+          }
+
+          @Override
+          public void reject(Throwable throwable) {
+            // nop
+          }
+        }, View.class);
+      }
+
+      @Override
+      public void reject(Throwable throwable) {
+        // nop
+      }
+    }, View.class);
+
+    // TODO
+    /*View nodeView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(nodeHandle);
     View ancestorView = view.getNodeManager().getNativeViewHierarchyManager().resolveView(ancestorHandle);
     RNSharedElementNode node = view.getNodeManager().acquire(nodeHandle, nodeView, isParent, ancestorView, styleConfig);
-    view.setItemNode(item, node);
+    view.setItemNode(item, node);*/
   }
 
-  @ReactProp(name = "startNode")
-  public void setStartNode(final RNSharedElementTransition view, final ReadableMap startNode) {
+  @ExpoProp(name = PROP_START)
+  public void setStartNode(final RNSharedElementTransition view, final Map<String, Object> startNode) {
     setViewItem(view, RNSharedElementTransition.Item.START, startNode);
   }
 
-  @ReactProp(name = "endNode")
-  public void setEndNode(final RNSharedElementTransition view, final ReadableMap endNode) {
+  @ExpoProp(name = PROP_END)
+  public void setEndNode(RNSharedElementTransition view, final Map<String, Object> endNode) {
     setViewItem(view, RNSharedElementTransition.Item.END, endNode);
   }
 }

@@ -1,7 +1,5 @@
 package com.ijzerenhein.sharedelement;
 
-import java.util.Locale;
-
 import android.util.Log;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -10,11 +8,12 @@ import android.graphics.Matrix;
 import android.view.View;
 import android.view.ViewParent;
 import android.content.Context;
+import android.os.Bundle;
 
-import com.facebook.react.uimanager.PixelUtil;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.drawee.drawable.ScalingUtils.ScaleType;
 import com.facebook.drawee.drawable.ScalingUtils.InterpolatingScaleType;
+
+import com.facebook.react.uimanager.PixelUtil;
 import com.facebook.react.views.image.ImageResizeMode;
 import com.facebook.react.modules.i18nmanager.I18nUtil;
 
@@ -61,29 +60,29 @@ public class RNSharedElementStyle {
     // nop
   }
 
-  RNSharedElementStyle(ReadableMap config, Context context) {
+  RNSharedElementStyle(Bundle config, Context context) {
     // Pre-fill the style with the style-config
-    if (config.hasKey("opacity")) opacity = (float) config.getDouble("opacity");
-    if (config.hasKey("backgroundColor")) backgroundColor = config.getInt("backgroundColor");
-    if (config.hasKey("borderColor")) borderColor = config.getInt("borderColor");
-    if (config.hasKey("borderWidth"))
+    if (config.containsKey("opacity")) opacity = (float) config.getDouble("opacity");
+    if (config.containsKey("backgroundColor")) backgroundColor = config.getInt("backgroundColor");
+    if (config.containsKey("borderColor")) borderColor = config.getInt("borderColor");
+    if (config.containsKey("borderWidth"))
       borderWidth = PixelUtil.toPixelFromDIP((float) config.getDouble("borderWidth"));
-    if (config.hasKey("borderStyle")) borderStyle = config.getString("borderStyle");
-    if (config.hasKey("resizeMode"))
+    if (config.containsKey("borderStyle")) borderStyle = config.getString("borderStyle");
+    if (config.containsKey("resizeMode"))
       scaleType = ImageResizeMode.toScaleType(config.getString("resizeMode"));
-    if (config.hasKey("elevation"))
+    if (config.containsKey("elevation"))
       elevation = PixelUtil.toPixelFromDIP((float) config.getDouble("elevation"));
 
     // Border-radius
     boolean isRTL = I18nUtil.getInstance().isRTL(context);
-    if (config.hasKey("borderRadius")) {
+    if (config.containsKey("borderRadius")) {
       float borderRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderRadius"));
       borderTopLeftRadius = borderRadius;
       borderTopRightRadius = borderRadius;
       borderBottomLeftRadius = borderRadius;
       borderBottomRightRadius = borderRadius;
     }
-    if (config.hasKey("borderTopEndRadius")) {
+    if (config.containsKey("borderTopEndRadius")) {
       float borderRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderTopEndRadius"));
       if (isRTL) {
         borderTopLeftRadius = borderRadius;
@@ -91,7 +90,7 @@ public class RNSharedElementStyle {
         borderTopRightRadius = borderRadius;
       }
     }
-    if (config.hasKey("borderTopStartRadius")) {
+    if (config.containsKey("borderTopStartRadius")) {
       float borderRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderTopStartRadius"));
       if (isRTL) {
         borderTopRightRadius = borderRadius;
@@ -99,7 +98,7 @@ public class RNSharedElementStyle {
         borderTopLeftRadius = borderRadius;
       }
     }
-    if (config.hasKey("borderBottomEndRadius")) {
+    if (config.containsKey("borderBottomEndRadius")) {
       float borderRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderBottomEndRadius"));
       if (isRTL) {
         borderBottomLeftRadius = borderRadius;
@@ -107,7 +106,7 @@ public class RNSharedElementStyle {
         borderBottomRightRadius = borderRadius;
       }
     }
-    if (config.hasKey("borderBottomStartRadius")) {
+    if (config.containsKey("borderBottomStartRadius")) {
       float borderRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderBottomStartRadius"));
       if (isRTL) {
         borderBottomRightRadius = borderRadius;
@@ -115,13 +114,13 @@ public class RNSharedElementStyle {
         borderBottomLeftRadius = borderRadius;
       }
     }
-    if (config.hasKey("borderTopLeftRadius"))
+    if (config.containsKey("borderTopLeftRadius"))
       borderTopLeftRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderTopLeftRadius"));
-    if (config.hasKey("borderTopRightRadius"))
+    if (config.containsKey("borderTopRightRadius"))
       borderTopRightRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderTopRightRadius"));
-    if (config.hasKey("borderBottomLeftRadius"))
+    if (config.containsKey("borderBottomLeftRadius"))
       borderBottomLeftRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderBottomLeftRadius"));
-    if (config.hasKey("borderBottomRightRadius"))
+    if (config.containsKey("borderBottomRightRadius"))
       borderBottomRightRadius = PixelUtil.toPixelFromDIP((float) config.getDouble("borderBottomRightRadius"));
   }
 

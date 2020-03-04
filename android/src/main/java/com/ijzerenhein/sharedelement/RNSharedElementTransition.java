@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.content.Context;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
@@ -53,7 +54,7 @@ public class RNSharedElementTransition extends ViewGroup {
   private RNSharedElementView mStartView;
   private RNSharedElementView mEndView;
 
-  public RNSharedElementTransition(ThemedReactContext context, RNSharedElementNodeManager nodeManager) {
+  public RNSharedElementTransition(Context context, RNSharedElementNodeManager nodeManager) {
     super(context);
     mNodeManager = nodeManager;
     mItems.add(new RNSharedElementTransitionItem(nodeManager, "start"));
