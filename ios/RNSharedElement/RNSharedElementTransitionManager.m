@@ -65,10 +65,7 @@ UM_EXPORT_MODULE(RNSharedElementTransition);
   } forView:nodeHandle ofClass:[UIView class]];
 }
 
-UM_VIEW_PROPERTY_ANIMATED(nodePosition, NSNumber *, RNSharedElementTransition, nodePosition, CGFloat)
-{
-  view.nodePosition = value.doubleValue;
-}
+UM_VIEW_PROPERTY_ANIMATED(nodePosition, CGFloat, RNSharedElementTransition)
 
 UM_VIEW_PROPERTY(animation, NSNumber *, RNSharedElementTransition)
 {
