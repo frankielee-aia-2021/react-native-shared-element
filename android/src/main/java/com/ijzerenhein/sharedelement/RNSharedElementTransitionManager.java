@@ -58,7 +58,7 @@ public class RNSharedElementTransitionManager extends ViewManager<RNSharedElemen
     view.releaseData();
   }
 
-  @ExpoProp(name = PROP_POSITION)
+  @ExpoProp(name = PROP_POSITION, animated = true)
   public void setNodePosition(RNSharedElementTransition view, final float nodePosition) {
     view.setNodePosition(nodePosition);
   }
